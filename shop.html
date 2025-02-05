@@ -72,7 +72,7 @@
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="active"><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
+                    <li><a href="About-Us.html">About Us</a></li>
                     <li><a href="cart.html">Cart</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                 </ul>
@@ -181,9 +181,16 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
-                                    <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                    <p class="product-price">€35</p>
+                                    <a href="#" onclick="openModal(
+                                        ['img/product-img/product1.jpg', 'img/product-img/product2.jpg', 'img/product-img/product3.jpg'], 
+                                        'Small Painting', 
+                                        'This is a detailed description of the small painting.', 
+                                        '30cm x 40cm', 
+                                        '€35', 
+                                        'PROD12345'
+                                    )">
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -218,9 +225,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
+                                    <p class="product-price">€35</p>
                                     <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -255,9 +262,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
+                                    <p class="product-price">€35</p>
                                     <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -292,9 +299,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
+                                    <p class="product-price">€35</p>
                                     <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -329,9 +336,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
+                                    <p class="product-price">€35</p>
                                     <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -366,9 +373,9 @@
                                 <!-- Product Meta Data -->
                                 <div class="product-meta-data">
                                     <div class="line"></div>
-                                    <p class="product-price">$180</p>
+                                    <p class="product-price">€35</p>
                                     <a href="product-details.html">
-                                        <h6>Modern Chair</h6>
+                                        <h6>Small Painting</h6>
                                     </a>
                                 </div>
                                 <!-- Ratings & Cart -->
@@ -485,6 +492,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </div>
     </footer>
+
+    <!-- Chuong Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="image-section">
+                    <img id="modalImage" src="" alt="Product Image" class="main-image">
+                    <div class="thumbnail-gallery">
+                        <!-- Thumbnails will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="description-section">
+                    <h2 id="modalTitle"></h2>
+                    <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+                    <p><strong>Size:</strong> <span id="modalSize"></span></p>
+                    <p><strong>Price:</strong> <span id="modalPrice"></span></p>
+                    <p><strong>Product Code:</strong> <span id="modalProductCode"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ##### Footer Area End ##### -->
 
     <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
@@ -497,6 +527,61 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("productModal");
+    
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+    
+        // Function to open the modal
+        function openModal(images, title, description, size, price, productCode) {
+            // Clear previous thumbnails
+            var thumbnailGallery = document.querySelector(".thumbnail-gallery");
+            thumbnailGallery.innerHTML = "";
+    
+            // Set the main image and product details
+            document.getElementById("modalImage").src = images[0];
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDescription").innerText = description;
+            document.getElementById("modalSize").innerText = size;
+            document.getElementById("modalPrice").innerText = price;
+            document.getElementById("modalProductCode").innerText = productCode;
+    
+            // Add thumbnails
+            images.forEach((image, index) => {
+                var thumbnail = document.createElement("img");
+                thumbnail.src = image;
+                thumbnail.alt = "Thumbnail " + (index + 1);
+                thumbnail.onclick = function() {
+                    document.getElementById("modalImage").src = image;
+                    var thumbnails = document.querySelectorAll(".thumbnail-gallery img");
+                    thumbnails.forEach(thumb => thumb.classList.remove("active"));
+                    thumbnail.classList.add("active");
+                };
+                if (index === 0) {
+                    thumbnail.classList.add("active"); // Highlight the first thumbnail
+                }
+                thumbnailGallery.appendChild(thumbnail);
+            });
+    
+            // Display the modal
+            modal.style.display = "block";
+        }
+    
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 
