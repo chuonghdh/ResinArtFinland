@@ -73,6 +73,7 @@
     overflow: hidden; /* Prevent content from overflowing */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    overflow-y: auto; /*Add vertical scrollbar if content overflows */
 }
 
 .close {
@@ -98,7 +99,6 @@
     width: 100%;
     height: 100%; /* Ensure the modal body takes full height */
     gap: 20px; /* Add spacing between image and description */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
 }
 
 .image-section {
@@ -142,8 +142,14 @@
     overflow-y: auto; /* Add vertical scrollbar if content overflows */
 }
 
+.modal-content p {
+    font-size: 14px; /* Adjust the value as needed */
+    line-height: 1.4;
+}
+
 .description-section h2 {
     margin-top: 0;
+    font-size: 20px;
 }
 
 /* Responsive Styles for Mobile */
